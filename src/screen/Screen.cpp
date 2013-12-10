@@ -40,7 +40,8 @@
 		}
 
 	//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen::setFBO(){
+	/*
+		void SingleScreen::setFBO(){
 
 		fbo.allocate(width,height);
 		fbo.begin();
@@ -57,14 +58,63 @@
 		shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
 		shader.linkProgram(); 
 	}
+	*/
+	
+	//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::setFBO(){
+
+		fbo.allocate(width,height);
+		fbo.begin();
+		ofClear(255,255,255,255);
+		fbo.end();
+
+		string shaderProgram = STRINGIFY(uniform sampler2DRect texture0;
+										uniform sampler2DRect alpha0;
+							void main (void){
+								vec2 st = gl_TexCoord[0].st;
+								vec4 image = texture2DRect(texture0, st);
+								vec4 alpha = texture2DRect(alpha0, st);
+
+								 gl_FragColor = vec4(image.rgb,(1-max(alpha.r,max(alpha.g,alpha.b)))*image.a );\n\
+							});
+		
+		shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
+		shader.linkProgram(); 
+
+
+		motionTexture.allocate(3840,1080,GL_RGB);
+		motionAlphaTexture.allocate(3840,1080,GL_RGB);
+	}
 
 	//------------------------------------------------------------------------------------------------------------------------
+	/*
 	void SingleScreen::setMotion()
 		{
 			motion = new ofGstVideoPlayer();
 			motion->setPixelFormat(OF_PIXELS_BGRA);
 			cout << "motion:"<<" initialized"<<endl ; 
 		}
+	*/
+	
+	//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::setMotion()
+		{
+			motion_left = new ofGstVideoPlayer();
+			motion_left->setPixelFormat(OF_PIXELS_RGB);
+			
+			motion_left_alpha = new ofGstVideoPlayer();
+			motion_left_alpha->setPixelFormat(OF_PIXELS_RGB);
+			
+			motion_right = new ofGstVideoPlayer();
+			motion_right->setPixelFormat(OF_PIXELS_RGB);
+			
+			motion_right_alpha = new ofGstVideoPlayer();
+			motion_right_alpha->setPixelFormat(OF_PIXELS_RGB);
+
+			cout << "motion:"<<" initialized"<<endl ; 
+		}
+
+
 
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::webkitSet()
@@ -128,8 +178,6 @@
 				}
 
 			contentLoadDelayed();
-
-
 			cout << "SingleScreen:"<<" webkitStartLoading() end"<<endl ; 
 		}
 
@@ -259,49 +307,201 @@
 	void SingleScreen::loadMotion()
 		{
 			cout << "motion:"<<" loadMotion"<<endl ; 
-			motion->loadMovie("mgh_1.mov");
-			motion->setLoopState(OF_LOOP_NORMAL);
-			motionTexture.allocate(motion->getWidth(),motion->getHeight(),GL_RGBA);
+			motion_left->loadMovie("MGH01_LEFT.mp4");
+			motion_left->setThreadAppSink(true);
+			//setFrameByFrame
+			motion_left->setLoopState(OF_LOOP_NORMAL);
+			motionTexture_left.allocate(motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
+
+			motion_left_alpha->loadMovie("MGH01_LEFT_ALPHA.mp4");
+			motion_left_alpha->setThreadAppSink(true);
+			
+			motion_left_alpha->setLoopState(OF_LOOP_NORMAL);
+			motionTexture_left_alpha.allocate(motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
+
+
+			motion_right->loadMovie("MGH01_RIGHT.mp4");
+			motion_right->setThreadAppSink(true);
+			motion_right->setLoopState(OF_LOOP_NORMAL);
+			motionTexture_right.allocate(motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
+
+			motion_right_alpha->loadMovie("MGH01_RIGHT_ALPHA.mp4");
+			motion_right_alpha->setThreadAppSink(true);
+			motion_right_alpha->setLoopState(OF_LOOP_NORMAL);
+			motionTexture_right_alpha.allocate(motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
+			
 			motionCurrentFrame = 0;
+			//motion = motion_left ;
 		}
 
 	//------------------------------------------------------------------------------------------------------------------------
+	/*
 	void SingleScreen::motionPlay()
 		{
 			cout << "motion:"<<" play"<<endl ; 
 			motion->setPaused(false);
 			motion->play();
 		}
+	*/
+	
+
+
+		//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::motionPlay()
+		{
+			cout << "motion:"<<" play"<<endl ; 
+			
+
+			motion_left->setPaused(false);
+			motion_right->setPaused(false);
+			
+			motion_left_alpha->setPaused(false);
+			motion_right_alpha->setPaused(false);
+
+			motion_left->play();
+			motion_right->play();
+			
+			motion_left_alpha->play();
+			motion_right_alpha->play();
+
+		}
+
+
+
+
+	//------------------------------------------------------------------------------------------------------------------------
+	/*
+		void SingleScreen::motionStop()
+		{
+			cout << "motion:"<<" stop"<<endl ; 
+			motion->stop();
+		}
+	*/
 	
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionStop()
 		{
 			cout << "motion:"<<" stop"<<endl ; 
-			motion->stop();
+		
+			motion_left->stop();
+			motion_right->stop();
+			
+			motion_left_alpha->stop();
+			motion_right_alpha->stop();
+
 		}
-	
+
+
 	//------------------------------------------------------------------------------------------------------------------------
+	/*
 	void SingleScreen::motionPause()
 		{
 			cout << "motion:"<<" pause"<<endl ; 
 			motion->setPaused(true);
+		}
+	*/
+
+	//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::motionPause()
+		{
+			cout << "motion:"<<" pause"<<endl ; 
+//			motion->setPaused(true);
+
+			motion_left->setPaused(true);
+			motion_right->setPaused(true);
+			
+			motion_left_alpha->setPaused(true);
+			motion_right_alpha->setPaused(true);
+
 		}
 	
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionFastFoward()
 		{
 			cout << "motion:"<<" FF"<<endl ; 
-			motion->setFrame((motion->getCurrentFrame()+30)%motion->getTotalNumFrames());
+			//motion->setFrame((motion->getCurrentFrame()+30)%motion->getTotalNumFrames());
+
+
+			motion_left->setFrame((motion_left->getCurrentFrame()+30)%motion_left->getTotalNumFrames());
+			motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()+30)%motion_left_alpha->getTotalNumFrames());
+			motion_right->setFrame((motion_right->getCurrentFrame()+30)%motion_right->getTotalNumFrames());
+			motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()+30)%motion_right_alpha->getTotalNumFrames());
 		}
 
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionRewind()
 		{
 			cout << "motion:"<<" RW"<<endl ; 
-			motion->setFrame((motion->getCurrentFrame()-30 > 0 )?motion->getCurrentFrame()-30 : motion->getTotalNumFrames()-30);
+
+
+			motion_left->setFrame((motion_left->getCurrentFrame()-30 > 0 )?motion_left->getCurrentFrame()-30 : motion_left->getTotalNumFrames()-30);
+			motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()-30 > 0 )?motion_left_alpha->getCurrentFrame()-30 : motion_left_alpha->getTotalNumFrames()-30);
+			motion_right->setFrame((motion_right->getCurrentFrame()-30 > 0 )?motion_right->getCurrentFrame()-30 : motion_right->getTotalNumFrames()-30);
+			motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()-30 > 0 )?motion_right_alpha->getCurrentFrame()-30 : motion_right_alpha->getTotalNumFrames()-30);
+
+
 		}
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::bakeFBO()
+		{
+			ofPushStyle();
+			ofEnableAlphaBlending();
+			
+			//record front layer with alpha
+			blurBegin();
+			alphaApply();
+			blurEnd();
+			
+			//join motion 
+			motionTexture.begin();
+			motionTexture_left.draw(0,0,1920,1080);
+			motionTexture_right.draw(1920,0,1920,1080);
+			motionTexture.end();
+
+			//join motion alpha
+			motionAlphaTexture.begin();
+			motionTexture_left_alpha.draw(0,0,1920,1080);
+			motionTexture_right_alpha.draw(1920,0,1920,1080);
+			motionAlphaTexture.end();
+
+
+			fbo.begin();
+			ofClear(255, 255, 255,0);
+			scalingApply();
+			
+			//views[webkitCurrentIndex]->draw();	
+
+			if(isBlurry())
+				{
+					ofPushStyle();
+					ofSetColor(255,blurCurrentAlpha);
+					blur.draw(0,0,width,height);		
+					ofPopStyle();
+				}
+				
+			alphaApply();
+			
+			//ofSetco(255, 255, 255,128);
+			shader.begin();
+ 			shader.setUniformTexture("texture0",motionTexture,1);
+			shader.setUniformTexture("alpha0",motionAlphaTexture,2);
+    
+			glBegin(GL_QUADS);  
+			glTexCoord2f(0, 0); glVertex3f(0, 0, 0);  
+			glTexCoord2f(motionTexture.getWidth(), 0); glVertex3f(width, 0, 0);  
+			glTexCoord2f(motionTexture.getWidth(), motionTexture.getHeight()); glVertex3f(width, height, 0);  
+			glTexCoord2f(0,motionTexture.getHeight());  glVertex3f(0,height, 0);  
+			glEnd();
+			shader.end();
+			
+			fbo.end();
+			ofDisableAlphaBlending();
+			ofPopStyle();
+		}
+
+
+	//------------------------------------------------------------------------------------------------------------------------
+	/*	void SingleScreen::bakeFBO()
 		{
 			ofPushStyle();
 			ofEnableAlphaBlending();
@@ -341,8 +541,7 @@
 			fbo.end();
 			ofDisableAlphaBlending();
 			ofPopStyle();
-		}
-
+		}*/
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::update()
 		{
@@ -362,6 +561,7 @@
 								motionPause();
 								webkitStartLoading();
 								lastFrame = motionCurrentFrame;
+								cout << "lastFrame > motionCurrentFrame" << " = " << ofToString(lastFrame)+ " > "+ ofToString(motionCurrentFrame) << endl ;
 							}
 
 
@@ -382,20 +582,41 @@
 		}
 
 	//------------------------------------------------------------------------------------------------------------------------
+	/*
+		void SingleScreen::motionUpdate()
+			{
+				//cout << "SingleScreen::motionUpdate begin"<< endl;
+				motion->update();
+				motionTexture.loadData(motion->getPixels(),motion->getWidth(),motion->getHeight(),GL_RGBA);
+				lastFrame = motionCurrentFrame;
+				motionCurrentFrame = motion->getCurrentFrame();
+
+
+				//cout << "SingleScreen::motionUpdate begin"<< endl;
+			}
+
+	*/
+
+	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionUpdate()
 		{
 			//cout << "SingleScreen::motionUpdate begin"<< endl;
-			motion->update();
-			motionTexture.loadData(motion->getPixels(),motion->getWidth(),motion->getHeight(),GL_RGBA);
+			motion_left->update();
+			motion_left_alpha->update();
+			motion_right->update();
+			motion_right_alpha->update();
+			
+			
+			motionTexture_left.loadData(motion_left->getPixels(),motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
+			motionTexture_right.loadData(motion_right->getPixels(),motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
+			
+			
+			motionTexture_left_alpha.loadData(motion_left_alpha->getPixels(),motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
+			motionTexture_right_alpha.loadData(motion_right_alpha->getPixels(),motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
+			
 			lastFrame = motionCurrentFrame;
-			motionCurrentFrame = motion->getCurrentFrame();
+			motionCurrentFrame = motion_left->getCurrentFrame();
 
-		//	if (motion->getIsMovieDone())
-			//	{
-					//reloadContent();
-				//	motion->setFrame(0);
-				//	motionPlay();
-			//	}
 
 			//cout << "SingleScreen::motionUpdate begin"<< endl;
 		}
@@ -407,15 +628,11 @@
 			//cout << "			 ::currFrame:"<<ofToString(motionCurrentFrame)<< endl;
 			//cout << "cf:" << ofToString(motionCurrentFrame) << endl;
 		
-
 			if (actionsVector[vectorIndex]->moment < motionCurrentFrame && actionsVector.size() > vectorIndex )
 				{
-
 					string operation = actionsVector[vectorIndex]->operation ;
 					cout << "[[fra: "+ofToString(motionCurrentFrame)+"||cmd: "+operation+"]]" << endl;
-					cout << "total:"+ofToString(motion->getTotalNumFrames()) << endl;
-
-
+					cout << "total:"+ofToString(motion_left->getTotalNumFrames()) << endl;
 
 					if ( operation == "load")
 						{
@@ -446,7 +663,6 @@
 							blurStartfocusOut();
 							alphaStartFadeOut();
 							views[webkitCurrentIndex]->call("hide");
-							
 						}
 						
 					if (!((vectorIndex == 0 ) &&  (actionsVector[actionsVector.size()-1]->moment < motionCurrentFrame) ))
@@ -455,7 +671,6 @@
 							vectorIndex = vectorIndex % actionsVector.size();
 						}
 				}
-
 			//cout << "SingleScreen::viewUpdate end"<< endl;
 		}
 
@@ -477,7 +692,6 @@
 							ofPopStyle();
 						}
 				}
-				
 
 			ofDisableAlphaBlending();
 			//cout << "SingleScreen::draw end"<< endl;
@@ -614,11 +828,70 @@
 			ofSetColor(128);
 			verdana.drawString("motion",3,line_h);
 			ofPopStyle();
+
+
+
+			///////////////////////////// motion left
+			ofTranslate(325,-125);
+			ofPushStyle();
+			ofFill();
+			ofSetColor(255,255,255,128);
+			ofRect(0,0,320,120);
+			ofSetColor(255,255,255,255);
+			ofNoFill();
+			ofRect(0,0,320,120);
+			ofPopStyle();
+			//motionTexture_left.draw(0,0,160,120);
+			ofPushStyle();
+			ofSetColor(128);
+			verdana.drawString("left",3,line_h);
+			ofPopStyle();
+
+			///////////////////////////// motion right
+			ofTranslate(160,0);
+			ofPushStyle();
+			ofFill();
 			
+			motionTexture_right.draw(0,0,160,120);
+			ofPushStyle();
+			ofSetColor(128);
+			verdana.drawString("right",3,line_h);
+			ofPopStyle();
+
+			///////////////////////////// motion left alpha
+			ofTranslate(-160,125);
+			ofPushStyle();
+			ofFill();
+			ofSetColor(255,255,255,128);
+			ofRect(0,0,320,120);
+			ofSetColor(255,255,255,255);
+			ofNoFill();
+			ofRect(0,0,320,120);
+			ofPopStyle();
+			motionTexture_left_alpha.draw(0,0,160,120);
+			ofPushStyle();
+			ofSetColor(128);
+			verdana.drawString("left",3,line_h);
+			ofPopStyle();
+
+			///////////////////////////// motion right alpha
+			ofTranslate(160,0);
+			ofPushStyle();
+			ofFill();
+			
+			motionTexture_right_alpha.draw(0,0,160,120);
+			ofPushStyle();
+			ofSetColor(128);
+			verdana.drawString("right",3,line_h);
+			ofPopStyle();
 
 
 			ofPopMatrix();
 		}
+
+
+		
+
 
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setBlur()
@@ -861,7 +1134,8 @@
 					contentLoadDelayed();
 				}
 			else 
-				motion->play();
+				motionPlay();
+				
 		}
 	
 	//------------------------------------------------------------------------------------------------------------------------

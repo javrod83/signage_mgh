@@ -28,8 +28,20 @@ class SingleScreen: public ofxBerkeliumSpotListener  {
 			int motionCurrentFrame;
 
 			//MOTION 
-			ofGstVideoPlayer * motion;
-			ofTexture motionTexture;
+			//ofGstVideoPlayer * motion;
+
+			ofGstVideoPlayer * motion_left;
+			ofGstVideoPlayer * motion_left_alpha;
+			ofGstVideoPlayer * motion_right;
+			ofGstVideoPlayer * motion_right_alpha;
+
+
+			ofFbo motionTexture;
+			ofFbo motionAlphaTexture;
+			ofTexture motionTexture_left;
+			ofTexture motionTexture_left_alpha;
+			ofTexture motionTexture_right;
+			ofTexture motionTexture_right_alpha;
 
 			//FBO
 			 ofFbo       fbo;
