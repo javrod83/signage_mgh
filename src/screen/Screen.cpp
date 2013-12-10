@@ -556,12 +556,12 @@
 								webkitStartLoading();
 							}
 
-						if (lastFrame > motionCurrentFrame && !webkitIsLoading() )
+						if (lastFrame > (motionCurrentFrame + 100) && !webkitIsLoading() )
 							{
 								motionPause();
 								webkitStartLoading();
-								lastFrame = motionCurrentFrame;
 								cout << "lastFrame > motionCurrentFrame" << " = " << ofToString(lastFrame)+ " > "+ ofToString(motionCurrentFrame) << endl ;
+								lastFrame = motionCurrentFrame;
 							}
 
 
