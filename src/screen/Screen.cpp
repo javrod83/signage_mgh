@@ -75,7 +75,7 @@
 								vec4 image = texture2DRect(texture0, st);
 								vec4 alpha = texture2DRect(alpha0, st);
 
-								 gl_FragColor = vec4(image.rgb,(1-max(alpha.r,max(alpha.g,alpha.b)))*image.a );\n\
+								 gl_FragColor = vec4(image.rgb,(max(alpha.r,max(alpha.g,alpha.b)))*image.a );\n\
 							});
 		
 		shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
@@ -628,7 +628,7 @@
 			//cout << "			 ::currFrame:"<<ofToString(motionCurrentFrame)<< endl;
 			//cout << "cf:" << ofToString(motionCurrentFrame) << endl;
 		
-			if (actionsVector[vectorIndex]->moment < motionCurrentFrame && actionsVector.size() > vectorIndex )
+			if (actionsVector[vectorIndex]->moment < motionCurrentFrame && actionsVector.size() > vectorIndex  )
 				{
 					string operation = actionsVector[vectorIndex]->operation ;
 					cout << "[[fra: "+ofToString(motionCurrentFrame)+"||cmd: "+operation+"]]" << endl;
@@ -704,7 +704,7 @@
 	void SingleScreen::drawInfo()
 		{
 
-			int box_x=20,box_y=660,box_w=ofGetScreenWidth()-40,box_h=300;
+			int box_x=20,box_y=660,box_w=1920-40,box_h=300;
 			int line_h=15,margin=15;
 			int box_r=128,box_g=128,box_b=128;
 			int font_r=255,font_g=255,font_b=255;
@@ -733,7 +733,7 @@
 
 			verdana.drawString(" blur amount: "+ofToString(blurAmount)+" iter: "+ofToString(blurIterations) + "alpha amount: " + ofToString(alphaCurrent),0 ,line_h*2);
 
-			ofTranslate(ofGetWidth()-500,0);
+			ofTranslate(1920-500,0);
 			ofPushMatrix();
 			verdana.drawString("n:   view	back ",0,0);
 			ofTranslate(0,line_h);
@@ -841,7 +841,7 @@
 			ofNoFill();
 			ofRect(0,0,320,120);
 			ofPopStyle();
-			//motionTexture_left.draw(0,0,160,120);
+			motionTexture_left.draw(0,0,160,120);
 			ofPushStyle();
 			ofSetColor(128);
 			verdana.drawString("left",3,line_h);

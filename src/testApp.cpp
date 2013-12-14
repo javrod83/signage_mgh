@@ -8,7 +8,7 @@
 
 //warp to viewport
 
-#define PRODUCTION false 
+#define PRODUCTION true 
 #define VIEWPORTWIDTH 3840
 #define VIEWPORTHEIGHT 1080
 
@@ -31,6 +31,8 @@ void testApp::setup(){
 	if(PRODUCTION)ofHideCursor();
 
 	updating=true;
+	
+	production = PRODUCTION;
 
 	if (PRODUCTION) myScreen = new SingleScreen(WIDTH,HEIGHT,0,0,VIEWPORTWIDTH,VIEWPORTHEIGHT);
 	else
@@ -69,7 +71,7 @@ void testApp::draw()
 			myScreen->draw();
 
 
-		//if (!PRODUCTION)
+		if (!production)
 			myScreen->drawInfo();
 }
 
@@ -103,8 +105,10 @@ void testApp::keyPressed(int key){
 	case 'z':
 	case 'Z':
 		myScreen->webkitStartLoading();
-		
-	
+		break;
+	case 'd' :
+	case 'D' :
+		production = !production;
 	}
 	
 
