@@ -102,14 +102,14 @@
 			motion_left = new ofGstVideoPlayer();
 			motion_left->setPixelFormat(OF_PIXELS_RGB);
 			
-			motion_left_alpha = new ofGstVideoPlayer();
-			motion_left_alpha->setPixelFormat(OF_PIXELS_RGB);
+			//motion_left_alpha = new ofGstVideoPlayer();
+			//motion_left_alpha->setPixelFormat(OF_PIXELS_RGB);
 			
-			motion_right = new ofGstVideoPlayer();
-			motion_right->setPixelFormat(OF_PIXELS_RGB);
+			//motion_right = new ofGstVideoPlayer();
+			//motion_right->setPixelFormat(OF_PIXELS_RGB);
 			
-			motion_right_alpha = new ofGstVideoPlayer();
-			motion_right_alpha->setPixelFormat(OF_PIXELS_RGB);
+			//motion_right_alpha = new ofGstVideoPlayer();
+			//motion_right_alpha->setPixelFormat(OF_PIXELS_RGB);
 
 			cout << "motion:"<<" initialized"<<endl ; 
 		}
@@ -307,28 +307,28 @@
 	void SingleScreen::loadMotion()
 		{
 			cout << "motion:"<<" loadMotion"<<endl ; 
-			motion_left->loadMovie("MGH01_LEFT.mp4");
+			motion_left->loadMovie("complete.mp4");
 			motion_left->setThreadAppSink(true);
 			//setFrameByFrame
 			motion_left->setLoopState(OF_LOOP_NORMAL);
 			motionTexture_left.allocate(motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
 
-			motion_left_alpha->loadMovie("MGH01_LEFT_ALPHA.mp4");
-			motion_left_alpha->setThreadAppSink(true);
+			//motion_left_alpha->loadMovie("MGH01_LEFT_ALPHA.mp4");
+			//motion_left_alpha->setThreadAppSink(true);
 			
-			motion_left_alpha->setLoopState(OF_LOOP_NORMAL);
-			motionTexture_left_alpha.allocate(motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
+			//motion_left_alpha->setLoopState(OF_LOOP_NORMAL);
+			//motionTexture_left_alpha.allocate(motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
 
 
-			motion_right->loadMovie("MGH01_RIGHT.mp4");
-			motion_right->setThreadAppSink(true);
-			motion_right->setLoopState(OF_LOOP_NORMAL);
-			motionTexture_right.allocate(motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
+			//motion_right->loadMovie("MGH01_RIGHT.mp4");
+			//motion_right->setThreadAppSink(true);
+			//motion_right->setLoopState(OF_LOOP_NORMAL);
+			//motionTexture_right.allocate(motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
 
-			motion_right_alpha->loadMovie("MGH01_RIGHT_ALPHA.mp4");
-			motion_right_alpha->setThreadAppSink(true);
-			motion_right_alpha->setLoopState(OF_LOOP_NORMAL);
-			motionTexture_right_alpha.allocate(motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
+			//motion_right_alpha->loadMovie("MGH01_RIGHT_ALPHA.mp4");
+			//motion_right_alpha->setThreadAppSink(true);
+			//motion_right_alpha->setLoopState(OF_LOOP_NORMAL);
+			//motionTexture_right_alpha.allocate(motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
 			
 			motionCurrentFrame = 0;
 			//motion = motion_left ;
@@ -353,16 +353,16 @@
 			
 
 			motion_left->setPaused(false);
-			motion_right->setPaused(false);
+			//motion_right->setPaused(false);
 			
-			motion_left_alpha->setPaused(false);
-			motion_right_alpha->setPaused(false);
+			//motion_left_alpha->setPaused(false);
+			//motion_right_alpha->setPaused(false);
 
 			motion_left->play();
-			motion_right->play();
+			//motion_right->play();
 			
-			motion_left_alpha->play();
-			motion_right_alpha->play();
+			//motion_left_alpha->play();
+			//motion_right_alpha->play();
 
 		}
 
@@ -384,10 +384,10 @@
 			cout << "motion:"<<" stop"<<endl ; 
 		
 			motion_left->stop();
-			motion_right->stop();
+			//motion_right->stop();
 			
-			motion_left_alpha->stop();
-			motion_right_alpha->stop();
+			//motion_left_alpha->stop();
+			//motion_right_alpha->stop();
 
 		}
 
@@ -408,10 +408,10 @@
 //			motion->setPaused(true);
 
 			motion_left->setPaused(true);
-			motion_right->setPaused(true);
+			//motion_right->setPaused(true);
 			
-			motion_left_alpha->setPaused(true);
-			motion_right_alpha->setPaused(true);
+			//motion_left_alpha->setPaused(true);
+			//motion_right_alpha->setPaused(true);
 
 		}
 	
@@ -423,9 +423,9 @@
 
 
 			motion_left->setFrame((motion_left->getCurrentFrame()+30)%motion_left->getTotalNumFrames());
-			motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()+30)%motion_left_alpha->getTotalNumFrames());
-			motion_right->setFrame((motion_right->getCurrentFrame()+30)%motion_right->getTotalNumFrames());
-			motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()+30)%motion_right_alpha->getTotalNumFrames());
+			//motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()+30)%motion_left_alpha->getTotalNumFrames());
+			//motion_right->setFrame((motion_right->getCurrentFrame()+30)%motion_right->getTotalNumFrames());
+			//motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()+30)%motion_right_alpha->getTotalNumFrames());
 		}
 
 	//------------------------------------------------------------------------------------------------------------------------
@@ -435,9 +435,9 @@
 
 
 			motion_left->setFrame((motion_left->getCurrentFrame()-30 > 0 )?motion_left->getCurrentFrame()-30 : motion_left->getTotalNumFrames()-30);
-			motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()-30 > 0 )?motion_left_alpha->getCurrentFrame()-30 : motion_left_alpha->getTotalNumFrames()-30);
-			motion_right->setFrame((motion_right->getCurrentFrame()-30 > 0 )?motion_right->getCurrentFrame()-30 : motion_right->getTotalNumFrames()-30);
-			motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()-30 > 0 )?motion_right_alpha->getCurrentFrame()-30 : motion_right_alpha->getTotalNumFrames()-30);
+			//motion_left_alpha->setFrame((motion_left_alpha->getCurrentFrame()-30 > 0 )?motion_left_alpha->getCurrentFrame()-30 : motion_left_alpha->getTotalNumFrames()-30);
+			//motion_right->setFrame((motion_right->getCurrentFrame()-30 > 0 )?motion_right->getCurrentFrame()-30 : motion_right->getTotalNumFrames()-30);
+			//motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()-30 > 0 )?motion_right_alpha->getCurrentFrame()-30 : motion_right_alpha->getTotalNumFrames()-30);
 
 
 		}
@@ -454,14 +454,15 @@
 			
 			//join motion 
 			motionTexture.begin();
-			motionTexture_left.draw(0,0,1920,1080);
-			motionTexture_right.draw(1920,0,1920,1080);
+			motionTexture_left.draw(0,0,7680,1080);
+			//motionTexture_right.draw(1920,0,1920,1080);
 			motionTexture.end();
 
 			//join motion alpha
 			motionAlphaTexture.begin();
-			motionTexture_left_alpha.draw(0,0,1920,1080);
-			motionTexture_right_alpha.draw(1920,0,1920,1080);
+			motionTexture_left.draw(-3840,0,7680,1080);
+			//motionTexture_left_alpha.draw(0,0,1920,1080);
+			//motionTexture_right_alpha.draw(1920,0,1920,1080);
 			motionAlphaTexture.end();
 
 
@@ -602,17 +603,17 @@
 		{
 			//cout << "SingleScreen::motionUpdate begin"<< endl;
 			motion_left->update();
-			motion_left_alpha->update();
-			motion_right->update();
-			motion_right_alpha->update();
+			//motion_left_alpha->update();
+			//motion_right->update();
+			//motion_right_alpha->update();
 			
 			
 			motionTexture_left.loadData(motion_left->getPixels(),motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
-			motionTexture_right.loadData(motion_right->getPixels(),motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
+			//motionTexture_right.loadData(motion_right->getPixels(),motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
 			
 			
-			motionTexture_left_alpha.loadData(motion_left_alpha->getPixels(),motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
-			motionTexture_right_alpha.loadData(motion_right_alpha->getPixels(),motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
+			//motionTexture_left_alpha.loadData(motion_left_alpha->getPixels(),motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
+			//motionTexture_right_alpha.loadData(motion_right_alpha->getPixels(),motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
 			
 			lastFrame = motionCurrentFrame;
 			motionCurrentFrame = motion_left->getCurrentFrame();
@@ -841,12 +842,13 @@
 			ofNoFill();
 			ofRect(0,0,320,120);
 			ofPopStyle();
-			motionTexture_left.draw(0,0,160,120);
+			motionTexture_left.draw(0,0,160,240);
 			ofPushStyle();
 			ofSetColor(128);
-			verdana.drawString("left",3,line_h);
+			verdana.drawString(".mp4",3,line_h);
 			ofPopStyle();
 
+			/*
 			///////////////////////////// motion right
 			ofTranslate(160,0);
 			ofPushStyle();
@@ -884,6 +886,7 @@
 			ofSetColor(128);
 			verdana.drawString("right",3,line_h);
 			ofPopStyle();
+			*/
 
 
 			ofPopMatrix();
