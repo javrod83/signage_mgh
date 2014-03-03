@@ -3,7 +3,7 @@
 #include "ofAppGlutWindow.h"
 
 
-#define PRODUCTION true
+#define PRODUCTION false
 
 //========================================================================
 int main( ){

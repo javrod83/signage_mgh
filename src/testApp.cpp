@@ -8,7 +8,7 @@
 
 //warp to viewport
 
-#define PRODUCTION true 
+#define PRODUCTION false 
 #define VIEWPORTWIDTH 3840
 #define VIEWPORTHEIGHT 1080
 
@@ -93,6 +93,10 @@ void testApp::keyPressed(int key){
 	case 'k':
 	case 'K':
 		myScreen->motionFastFoward();
+		break;
+	case 'j':
+	case 'J':
+		myScreen->jump();
 		break;
 	case 'q':
 	case 'Q':

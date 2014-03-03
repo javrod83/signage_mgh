@@ -162,4 +162,9 @@ class SingleScreen: public ofxBerkeliumSpotListener  {
 			bool initializationIsComplete();
 			void addToDelayed(ofxBerkeliumSpot * webkit);
 
+			void jumpToZero();
+			void jump();
+			void updateActionVectorIndex();
+			void updateWEbkitViewIndex();
+
 	};

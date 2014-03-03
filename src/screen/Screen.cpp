@@ -17,7 +17,7 @@
 		}
 
 	//TO-DO destructor
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::init()
 		{
 			cout << "SingleScreen:"<<" init() begin"<<endl ; 
@@ -39,30 +39,28 @@
 			cout << "SingleScreen:"<<" init() end"<<endl ; 
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
-	/*
-		void SingleScreen::setFBO(){
+//------------------------------------------------------------------------------------------------------------------------
+	/*void SingleScreen::setFBO()
+			{
 
-		fbo.allocate(width,height);
-		fbo.begin();
-		ofClear(255,255,255,255);
-		fbo.end();
+				fbo.allocate(width,height);
+				fbo.begin();
+				ofClear(255,255,255,255);
+				fbo.end();
 
-		string shaderProgram = STRINGIFY(uniform sampler2DRect tex0;
-							void main (void){
-								vec2 st = gl_TexCoord[0].st;
-								vec4 image = texture2DRect(tex0, st);    
-								gl_FragColor = vec4(image.g,image.b,image.a,image.r);\n\
-							});
-		
-		shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
-		shader.linkProgram(); 
-	}
+				string shaderProgram = STRINGIFY(uniform sampler2DRect tex0;
+									void main (void){
+										vec2 st = gl_TexCoord[0].st;
+										vec4 image = texture2DRect(tex0, st);    
+										gl_FragColor = vec4(image.g,image.b,image.a,image.r);\n\
+									});
+				
+				shader.setupShaderFromSource(GL_FRAGMENT_SHADER, shaderProgram);
+				shader.linkProgram(); 
+			}
 	*/
 	
-	//------------------------------------------------------------------------------------------------------------------------
-
-
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setFBO(){
 
 		fbo.allocate(width,height);
@@ -88,17 +86,17 @@
 		motionAlphaTexture.allocate(3840,1080,GL_RGB);
 	}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	/*
-	void SingleScreen::setMotion()
-		{
-			motion = new ofGstVideoPlayer();
-			motion->setPixelFormat(OF_PIXELS_BGRA);
-			cout << "motion:"<<" initialized"<<endl ; 
-		}
+		void SingleScreen::setMotion()
+			{
+				motion = new ofGstVideoPlayer();
+				motion->setPixelFormat(OF_PIXELS_BGRA);
+				cout << "motion:"<<" initialized"<<endl ; 
+			}
 	*/
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setMotion()
 		{
 			motion_left = new ofGstVideoPlayer();
@@ -116,9 +114,7 @@
 			cout << "motion:"<<" initialized"<<endl ; 
 		}
 
-
-
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::webkitSet()
 		{
 			cout << "SingleScreen:"<<" webkitSet() begin"<<endl ; 
@@ -131,13 +127,13 @@
 			cout << "SingleScreen:"<<" webkitSet() end"<<endl ; 
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	bool SingleScreen::webkitIsLoading()
 		{
 			return delayed.size() > 0;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::webkitReloadUrls()
 		{
 			cout << "webkitReloadUrls:"<<" begin"<<endl ; 
@@ -159,7 +155,8 @@
 
 			cout << "webkitReloadUrls:"<<" end"<<endl ;
 		}
-	//------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::webkitStartLoading()
 		{
 			cout << "SingleScreen:"<<" webkitStartLoading() begin"<<endl ; 
@@ -183,10 +180,7 @@
 			cout << "SingleScreen:"<<" webkitStartLoading() end"<<endl ; 
 		}
 
-
-
-
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::webkitUpdateLoading()
 		{
 			//cout << "SingleScreen:"<<" webkitUpdateLoading() begin"<<endl ; 
@@ -204,7 +198,7 @@
 			//cout << "SingleScreen:"<<" webkitUpdateLoading() end"<<endl ; 
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setView()
 		{
 			cout << "SingleScreen:"<<" setView() begin"<<endl ; 
@@ -224,7 +218,7 @@
 			cout << "SingleScreen:"<<" setView() end"<<endl ; 
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setBack()
 		{
 			cout << "SingleScreen:"<<" setBack() begin"<<endl ; 
@@ -243,7 +237,7 @@
 			cout << "SingleScreen:"<<" setBack() end"<<endl ; 
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::loadAction(int id, int time ,string _operation , string path)
 		{
 			cout << "loadAction:"<<" begin"<<endl ; 
@@ -268,7 +262,7 @@
 			cout << "loadAction:"<<" end"<<endl ; 
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::loadContent()
 		{
 			cout << "loadContent:"<<" begin"<<endl ; 
@@ -305,7 +299,7 @@
 			cout << "loadContent:"<<" end"<<endl ; 
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::loadMotion()
 		{
 			cout << "motion:"<<" loadMotion"<<endl ; 
@@ -314,112 +308,41 @@
 			//setFrameByFrame
 			motion_left->setLoopState(OF_LOOP_NORMAL);
 			motionTexture_left.allocate(motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
-
-			//motion_left_alpha->loadMovie("MGH01_LEFT_ALPHA.mp4");
-			//motion_left_alpha->setThreadAppSink(true);
-			
-			//motion_left_alpha->setLoopState(OF_LOOP_NORMAL);
-			//motionTexture_left_alpha.allocate(motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
-
-
-			//motion_right->loadMovie("MGH01_RIGHT.mp4");
-			//motion_right->setThreadAppSink(true);
-			//motion_right->setLoopState(OF_LOOP_NORMAL);
-			//motionTexture_right.allocate(motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
-
-			//motion_right_alpha->loadMovie("MGH01_RIGHT_ALPHA.mp4");
-			//motion_right_alpha->setThreadAppSink(true);
-			//motion_right_alpha->setLoopState(OF_LOOP_NORMAL);
-			//motionTexture_right_alpha.allocate(motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
 			
 			motionCurrentFrame = 0;
 			//motion = motion_left ;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
-	/*
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionPlay()
 		{
 			cout << "motion:"<<" play"<<endl ; 
-			motion->setPaused(false);
-			motion->play();
-		}
-	*/
-	
-
-
-		//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen::motionPlay()
-		{
-			cout << "motion:"<<" play"<<endl ; 
-			
-
 			motion_left->setPaused(false);
-			//motion_right->setPaused(false);
-			
-			//motion_left_alpha->setPaused(false);
-			//motion_right_alpha->setPaused(false);
-
 			motion_left->play();
-			//motion_right->play();
-			
-			//motion_left_alpha->play();
-			//motion_right_alpha->play();
-
 		}
-
-
-
-
-	//------------------------------------------------------------------------------------------------------------------------
-	/*
-		void SingleScreen::motionStop()
-		{
-			cout << "motion:"<<" stop"<<endl ; 
-			motion->stop();
-		}
-	*/
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionStop()
 		{
 			cout << "motion:"<<" stop"<<endl ; 
-		
 			motion_left->stop();
-			//motion_right->stop();
-			
-			//motion_left_alpha->stop();
-			//motion_right_alpha->stop();
-
 		}
 
-
-	//------------------------------------------------------------------------------------------------------------------------
-	/*
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionPause()
 		{
 			cout << "motion:"<<" pause"<<endl ; 
-			motion->setPaused(true);
-		}
-	*/
-
-	//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen::motionPause()
-		{
-			cout << "motion:"<<" pause"<<endl ; 
-//			motion->setPaused(true);
-
+			//motion->setPaused(true);
 			motion_left->setPaused(true);
 			//motion_right->setPaused(true);
-			
 			//motion_left_alpha->setPaused(true);
 			//motion_right_alpha->setPaused(true);
-
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionFastFoward()
 		{
+
 			cout << "motion:"<<" FF"<<endl ; 
 			//motion->setFrame((motion->getCurrentFrame()+30)%motion->getTotalNumFrames());
 
@@ -430,7 +353,25 @@
 			//motion_right_alpha->setFrame((motion_right_alpha->getCurrentFrame()+30)%motion_right_alpha->getTotalNumFrames());
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::jump()
+		{
+			cout << "jumped to frame :"<<ofToString(motion_left->getTotalNumFrames()-300)<<endl ; 
+			motion_left->setFrame(motion_left->getTotalNumFrames()-300);
+			motionUpdate();
+			//updateActionVectorIndex();
+		}
+
+//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::jumpToZero()
+		{
+			motion_left->setFrame(0);
+		}
+			
+
+
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionRewind()
 		{
 			cout << "motion:"<<" RW"<<endl ; 
@@ -443,7 +384,8 @@
 
 
 		}
-	//------------------------------------------------------------------------------------------------------------------------
+	
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::bakeFBO()
 		{
 			ofPushStyle();
@@ -502,8 +444,7 @@
 			ofPopStyle();
 		}
 
-
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	/*	void SingleScreen::bakeFBO()
 		{
 			ofPushStyle();
@@ -545,11 +486,11 @@
 			ofDisableAlphaBlending();
 			ofPopStyle();
 		}*/
-	//------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::update()
 		{
 			//cout << "SingleScreen::update begin "  << endl;
-
 
 				if  (initializationIsComplete())
 					{
@@ -559,13 +500,15 @@
 								webkitStartLoading();
 							}
 
-						if (lastFrame > (motionCurrentFrame + 100) && !webkitIsLoading() )
-							{
-								motionPause();
-								webkitStartLoading();
-								cout << "lastFrame > motionCurrentFrame" << " = " << ofToString(lastFrame)+ " > "+ ofToString(motionCurrentFrame) << endl ;
-								lastFrame = motionCurrentFrame;
-							}
+					//	if (lastFrame > (motionCurrentFrame + 100) && !webkitIsLoading() )
+						//	{
+								//motionPause();
+								//webkitStartLoading();
+						//		webkitCurrentIndex=0;
+								
+							//	cout << "lastFrame > motionCurrentFrame" << " = " << ofToString(lastFrame)+ " > "+ ofToString(motionCurrentFrame) << endl ;
+							//	lastFrame = motionCurrentFrame;
+							//}
 
 
 						if (!webkitIsLoading())
@@ -573,49 +516,23 @@
 							motionUpdate();
 							viewUpdate();
 							scalingUpdate();
-							blurUpdate();
-							alphaUpdate();
+							//blurUpdate();
+							//alphaUpdate();
 							bakeFBO();
 						}
 					}
 
-			
-
 			//cout << "SingleScreen::update end " << endl;
 		}
-
-	//------------------------------------------------------------------------------------------------------------------------
-	/*
-		void SingleScreen::motionUpdate()
-			{
-				//cout << "SingleScreen::motionUpdate begin"<< endl;
-				motion->update();
-				motionTexture.loadData(motion->getPixels(),motion->getWidth(),motion->getHeight(),GL_RGBA);
-				lastFrame = motionCurrentFrame;
-				motionCurrentFrame = motion->getCurrentFrame();
-
-
-				//cout << "SingleScreen::motionUpdate begin"<< endl;
-			}
-
-	*/
 
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::motionUpdate()
 		{
 			//cout << "SingleScreen::motionUpdate begin"<< endl;
 			motion_left->update();
-			//motion_left_alpha->update();
-			//motion_right->update();
-			//motion_right_alpha->update();
 			
 			
 			motionTexture_left.loadData(motion_left->getPixels(),motion_left->getWidth(),motion_left->getHeight(),GL_RGB);
-			//motionTexture_right.loadData(motion_right->getPixels(),motion_right->getWidth(),motion_right->getHeight(),GL_RGB);
-			
-			
-			//motionTexture_left_alpha.loadData(motion_left_alpha->getPixels(),motion_left_alpha->getWidth(),motion_left_alpha->getHeight(),GL_RGB);
-			//motionTexture_right_alpha.loadData(motion_right_alpha->getPixels(),motion_right_alpha->getWidth(),motion_right_alpha->getHeight(),GL_RGB);
 			
 			lastFrame = motionCurrentFrame;
 			motionCurrentFrame = motion_left->getCurrentFrame();
@@ -631,19 +548,42 @@
 			//cout << "			 ::currFrame:"<<ofToString(motionCurrentFrame)<< endl;
 			//cout << "cf:" << ofToString(motionCurrentFrame) << endl;
 		
-			if (actionsVector[vectorIndex]->moment < motionCurrentFrame && actionsVector.size() > vectorIndex  )
+			//if (actionsVector[vectorIndex]->moment < motionCurrentFrame && actionsVector.size() > vectorIndex  )
+			if ( motionCurrentFrame > actionsVector[vectorIndex]->moment  &&   vectorIndex < actionsVector.size() && (motionCurrentFrame <= actionsVector[actionsVector.size()-1]->moment   || vectorIndex == actionsVector.size()-1 )  )
 				{
 					string operation = actionsVector[vectorIndex]->operation ;
 					cout << "[[fra: "+ofToString(motionCurrentFrame)+"||cmd: "+operation+"]]" << endl;
 					cout << "total:"+ofToString(motion_left->getTotalNumFrames()) << endl;
 
+					if (motionCurrentFrame < lastFrame )
+						{
+							cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CHANGE xxxxxxxxxxxxxxxxxxxxxx" << endl; 
+						}
+
+					//More ugly fix 
 					if ( operation == "load")
 						{
-							if (vectorIndex != 0)
-								{
-									webkitCurrentIndex++;
-									webkitCurrentIndex = webkitCurrentIndex%views.size();
-								}
+							webkitCurrentIndex++;
+							webkitCurrentIndex = webkitCurrentIndex%views.size();
+						}
+					else if ( operation == "start")
+						{
+							scalingStart();
+							//alphaStartFadeIn();
+							//blurStartfocusIn();
+						}
+					else if ( operation == "end") 
+						{
+							//blurStartfocusOut();
+							//alphaStartFadeOut();
+							
+						}
+					/*
+					if ( operation == "load")
+						{
+							webkitCurrentIndex++;
+							webkitCurrentIndex = webkitCurrentIndex%views.size();
+							
 							ofPushStyle();
 							blurBegin();
 							ofClear(255);
@@ -663,21 +603,54 @@
 						}
 					else if (operation == "end")
 						{	
+							views[webkitCurrentIndex]->call("hide");
 							blurStartfocusOut();
 							alphaStartFadeOut();
-							views[webkitCurrentIndex]->call("hide");
-						}
-						
-					if (!((vectorIndex == 0 ) &&  (actionsVector[actionsVector.size()-1]->moment < motionCurrentFrame) ))
+							if (vectorIndex == actionsVector.size()-1)
+								{
+									cout << "jumping to zero"<< endl;
+									jumpToZero();
+								}
+					}
+					*/
+					updateActionVectorIndex();
+				}
+			//updateActionVectorIndex();
+			//cout << "SingleScreen::viewUpdate end"<< endl;
+		}
+
+
+//-------------------------------------------------------?-----------------------------------------------------------------
+	void SingleScreen::updateActionVectorIndex()
+		{
+				//if (!( vectorIndex == 0  &&  (actionsVector[actionsVector.size()-1]->moment < motionCurrentFrame) ))
+					//	{
+
+			cout << " update vectorIndex:[ " << ofToString(vectorIndex) <<" ]"<< endl;
+
+		//	while (actionsVector[vectorIndex]->moment < motionCurrentFrame && vectorIndex != actionsVector.size()-1 )
+				{ 
+					vectorIndex++;
+					vectorIndex = vectorIndex % actionsVector.size();
+				}
+
+			cout << "            updated:[ " << ofToString(vectorIndex) <<" ]" <<endl;
+			
+
+						//}
+				// si el indice del vector de acciones es igual a cero  y el cuadro actual es mayor al cuadro de la ultima accion
+					/*
+					if (!( vectorIndex == 0  &&  (actionsVector[actionsVector.size()-1]->moment < motionCurrentFrame) ))
 						{
 							vectorIndex++;
 							vectorIndex = vectorIndex % actionsVector.size();
 						}
-				}
-			//cout << "SingleScreen::viewUpdate end"<< endl;
-		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+					*/
+		}
+			
+
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::draw()
 		{
 			//cout << "SingleScreen::draw begin"<< endl;
@@ -707,7 +680,7 @@
 	void SingleScreen::drawInfo()
 		{
 
-			int box_x=20,box_y=660,box_w=1920-40,box_h=300;
+			int box_x=20,box_y=460,box_w=1920-40,box_h=300;
 			int line_h=15,margin=15;
 			int box_r=128,box_g=128,box_b=128;
 			int font_r=255,font_g=255,font_b=255;
@@ -736,7 +709,7 @@
 
 			verdana.drawString(" blur amount: "+ofToString(blurAmount)+" iter: "+ofToString(blurIterations) + "alpha amount: " + ofToString(alphaCurrent),0 ,line_h*2);
 
-			ofTranslate(1920-500,0);
+			ofTranslate(1280-500,0);
 			ofPushMatrix();
 			verdana.drawString("n:   view	back ",0,0);
 			ofTranslate(0,line_h);
@@ -894,10 +867,6 @@
 			ofPopMatrix();
 		}
 
-
-		
-
-
 	//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setBlur()
 		{
@@ -921,7 +890,7 @@
 		}
 			
 	//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen:: blurStartfocusIn()
+	void SingleScreen::blurStartfocusIn()
 		{
 			blurIn = true;
 			blurFrameStart = motionCurrentFrame ;
@@ -929,15 +898,15 @@
 		}
 			
 	//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen:: blurStartfocusOut()
+	void SingleScreen::blurStartfocusOut()
 		{
 			blurOut = true;
 			blurFrameStart = motionCurrentFrame ;
 			blurFrameStop = blurFrameStart + 25*blurInDuration ;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
-	void SingleScreen:: blurUpdate()
+//------------------------------------------------------------------------------------------------------------------------
+	void SingleScreen::blurUpdate()
 		{
 			if(blurIn)
 				{
@@ -968,13 +937,13 @@
 				}
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	bool SingleScreen::isBlurry()
 		{
 			return (blurIn || blurOut);
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::blurBegin()
 		{
 			blur.begin();
@@ -986,13 +955,13 @@
 			//blur.iterations = ofMap(mouseY,0,ofGetHeight(),1,10,true);
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::blurEnd()
 		{
 			blur.end();
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setScaling()
 		{
 			scaleAmount  = 1.2 ;
@@ -1004,7 +973,7 @@
 			scaling = false;
 		}
 			
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::scalingStart()
 		{
 			scaleAmount  = 1.2 ;
@@ -1012,14 +981,14 @@
 			scaling = true;
 		}
 			
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::scalingUpdate()
 		{
 			if (isScaling())
 				scaleCurrent = ofMap(motionCurrentFrame,scaleStartFrame,scaleEndFrame,1.0,1.2);
 		}
 			
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::scalingApply()
 		{
 			ofPushMatrix();
@@ -1031,13 +1000,13 @@
 			ofPopMatrix();
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	bool SingleScreen::isScaling()
 		{
 			return scaling;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::setAlpha()
 		{
 			alphaCurrent  = 255 ;
@@ -1046,7 +1015,7 @@
 			alphaDuration = 3.0 ;
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::alphaStartFadeIn()
 		{
 			isFadin = true;
@@ -1054,7 +1023,7 @@
 			alphaStopFrame = alphaStartFrame + 25*alphaDuration ;
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::alphaStartFadeOut()
 		{
 			ifFadeOut = true;
@@ -1062,7 +1031,7 @@
 			alphaStopFrame = alphaStartFrame + 25*alphaDuration ;
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::alphaUpdate()
 		{
 	
@@ -1087,7 +1056,7 @@
 	
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::alphaApply()
 		{
 			ofPushStyle();
@@ -1097,39 +1066,39 @@
 			ofPopStyle();
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	bool SingleScreen::isFading()
 		{
 			return(isFadin||ifFadeOut);
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::initializationBegin()
 		{
 			initializingCounter++;
 			cout << "initializationBegin! "<<ofToString(initializingCounter)<<endl;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::initializationEnd()
 		{
 			initializingCounter--;
 			cout << "initializationEnd! "<<ofToString(initializingCounter)<< endl;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	bool SingleScreen::initializationIsComplete()
 		{
 			return initializingCounter == 0 ;
 		}
 
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::contentLoading()
 		{
 			cout << "SINGLE SCREEN LOADING "<< endl;
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::contentReady()
 		{
 			cout << "SINGLE SCREEN ready "<< endl;
@@ -1139,17 +1108,25 @@
 					contentLoadDelayed();
 				}
 			else 
-				motionPlay();
+				{ // le ugly fix ! 
+
+					for (int i = 0 ; i < views.size(); i ++)
+						{
+							views[i]->call("show");
+						}
+					motionPlay();
+				}
+				
 				
 		}
 	
-	//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::addToDelayed(ofxBerkeliumSpot * webkit)
 		{
 			delayed.push_back(webkit);
 		}
 
-		//------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 	void SingleScreen::contentLoadDelayed()
 		{
 			cout << "SingleScreen:"<<" contentBeginDelayedLoading() begin"<<endl ;

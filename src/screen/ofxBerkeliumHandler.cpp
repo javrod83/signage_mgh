@@ -109,7 +109,7 @@ void ofxBerkeliumHandler:: draw(){
 	//cout << " ofxBerkeliumHandler draw begin"<< endl;
 	
 	ofPushStyle();
-	ofSetColor(255,255,255,myAlpha);
+	//ofSetColor(255,255,255,myAlpha);
 	browser->draw(xPos,yPos,width,height);
 	ofPopStyle();
 	//cout << " ofxBerkeliumHandler draw end"<< endl;
